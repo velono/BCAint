@@ -32,6 +32,6 @@ public class BookController {
     @RequestMapping("/updatePublishDates")
     ResponseEntity<String> updatePublishDates(){
     	bookService.addFirstPublishDateToAllBooks();
-    	return new ResponseEntity<String>("Updated to dummy data.",HttpStatus.OK);
+    	return new ResponseEntity<String>("Updated.",HttpStatus.OK);
     }
 }
