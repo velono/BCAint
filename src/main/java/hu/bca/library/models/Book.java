@@ -15,7 +15,6 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     
     @Column(nullable = false)
     private String title;
@@ -25,10 +24,7 @@ public class Book {
     
     @Column
     private Integer year;
-    
-    @Column
-    private String first_publish_date;
-    
+     
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "book_author"

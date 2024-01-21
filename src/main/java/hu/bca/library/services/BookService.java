@@ -1,8 +1,10 @@
 package hu.bca.library.services;
 
-import hu.bca.library.models.Book;
-
 import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+
+import hu.bca.library.models.Book;
 
 public interface BookService {
 	Book addAuthor(Long bookId, Long authorId);
@@ -11,6 +13,10 @@ public interface BookService {
 
 	Book addFirstPublishDate(Long bookId, String workId);
 
-	String findPublichDateByWorkId(String workId);
+	String findPublishDateByWorkId(String workId);
+
+	List<Book> getSpecificUKBooks();
+
+	
 
 }
