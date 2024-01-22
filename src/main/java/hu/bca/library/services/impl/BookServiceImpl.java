@@ -95,7 +95,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public String findPublishDateByWorkId(String workId) { // This method goes to the internet to find the date to add.
+	public String findPublishDateByWorkId(String workId) { // This method extracts the data from the JSON response.
 		String firstPublishedOn = "";
 		final String uri = "https://openlibrary.org/works/" + workId + ".json";
 		RestTemplate restTemplate = new RestTemplate();

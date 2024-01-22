@@ -13,8 +13,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 	List<Book> findByAuthorsCountryAndYearGreaterThanEqualOrderByYearDesc(String country, Integer year,
 			Pageable pageable);
 
-//	List<Book> findByAuthorsCountryAndYearGreaterThanEqualOrderByYearDesc(String country, Optional<Integer> fromYear, Pageable pageable);
-
 	List<Book> findByAuthorsCountry(String string, PageRequest pageable);
 
 }
