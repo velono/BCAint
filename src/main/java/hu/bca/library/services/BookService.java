@@ -13,6 +13,6 @@ public interface BookService {
 
 	String findPublishDateByWorkId(String workId);
 
-	List<Book> getSpecificBooks(String country, Integer from);
+	List<Book> getSpecificBooks(String country, Integer from, Integer to);
 
 }

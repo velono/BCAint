@@ -31,7 +31,7 @@ public class BookController {
 		return this.bookService.addAuthor(bookId, authorId);
 	}
 
-	@RequestMapping("/updatePublishDates")
+	@RequestMapping("/update-all-with-year")
 	ResponseEntity<String> updatePublishDates() {
 		bookService.addFirstPublishDateToAllBooks();
 		return new ResponseEntity<String>("Updated.", HttpStatus.OK);
@@ -39,8 +39,8 @@ public class BookController {
 
 	@RequestMapping("/query/{country}")
 	ResponseEntity<List<Book>> getBooksFromCountry(@PathVariable String country,
-			@RequestParam(required = false) Integer from) {
-		List<Book> result = bookService.getSpecificBooks(country, from);
+			@RequestParam(required = false) Integer from, @RequestParam(required = false) Integer to) {
+		List<Book> result = bookService.getSpecificBooks(country, from, to);
 		return new ResponseEntity<List<Book>>(result, HttpStatus.OK);
 	}
 }

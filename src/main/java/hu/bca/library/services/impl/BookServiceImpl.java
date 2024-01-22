@@ -112,14 +112,21 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> getSpecificBooks(String country, Integer from) {
+	public List<Book> getSpecificBooks(String country, Integer from, Integer to) {
 		PageRequest pageable = PageRequest.of(0, 10);
-		if (from == null) {
-			return bookRepository.findByAuthorsCountry(country, pageable);
-		} else {
+		
+		if (from == null && to != null) {
+			return bookRepository.findByAuthorsCountryAndYearLessThanEqualOrderByYearDesc(country, to, pageable);
+		}
+		else if( from != null && to == null) {
 			return bookRepository.findByAuthorsCountryAndYearGreaterThanEqualOrderByYearDesc(country, from, pageable);
 		}
-
+		else if (from != null && to != null) {
+			return bookRepository.findByAuthorsCountryAndYearBetweenOrderByYearDesc(country, from, to, pageable);
+		}
+		else {
+			return bookRepository.findByAuthorsCountry(country, pageable);
+		} 
 	}
 
 }
