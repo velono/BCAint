@@ -81,19 +81,19 @@ public class BookServiceImpl implements BookService {
 		return this.bookRepository.save(book.get());
 	}
 
-
 	private Integer extractedYear(String stringDate) {
 		Pattern pattern = Pattern.compile("\\b\\d{4}\\b");
 		Matcher matcher = pattern.matcher(stringDate);
 
-        if (matcher.find()) {
-            String yearString = matcher.group();
-        
-            return Integer.valueOf(yearString);
-        } else {
-            return null; 
-        }
+		if (matcher.find()) {
+			String yearString = matcher.group();
+
+			return Integer.valueOf(yearString);
+		} else {
+			return null;
+		}
 	}
+
 	@Override
 	public String findPublishDateByWorkId(String workId) { // This method goes to the internet to find the date to add.
 		String firstPublishedOn = "";
@@ -110,19 +110,16 @@ public class BookServiceImpl implements BookService {
 			return null;
 		}
 	}
-	
-	
-	////////////////////
-	@Override
-	public List<Book> getSpecificUKBooks() {
-		
-	    // Example with Pageable (adjust the page size and number as needed)
-        PageRequest pageable = PageRequest.of(0, 10);
-      //bookRepository.findByAuthorsCountryAndYearLessThanEqualOrderByYearDesc("UK", Optional.ofNullable(null), pageable);
-        //bookRepository.findByAuthorsCountry("UK", pageable);
-      		return bookRepository.findByAuthorsCountryAndYearLessThanEqualOrderByYearDesc("UK", 1984, pageable);
-      	
-	}
 
+	@Override
+	public List<Book> getSpecificBooks(String country, Integer from) {
+		PageRequest pageable = PageRequest.of(0, 10);
+		if (from == null) {
+			return bookRepository.findByAuthorsCountry(country, pageable);
+		} else {
+			return bookRepository.findByAuthorsCountryAndYearGreaterThanEqualOrderByYearDesc(country, from, pageable);
+		}
+
+	}
 
 }

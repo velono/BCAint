@@ -2,8 +2,6 @@ package hu.bca.library.services;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-
 import hu.bca.library.models.Book;
 
 public interface BookService {
@@ -15,8 +13,6 @@ public interface BookService {
 
 	String findPublishDateByWorkId(String workId);
 
-	List<Book> getSpecificUKBooks();
-
-	
+	List<Book> getSpecificBooks(String country, Integer from);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -36,12 +37,10 @@ public class BookController {
 		return new ResponseEntity<String>("Updated.", HttpStatus.OK);
 	}
 
-	@RequestMapping("/getBooksFromCountry")
-	ResponseEntity<List<Book>> getBooksFromCountry()
-	//(@PathVariable String country, @PathVariable(required = false) Long from) 
-	{
-//		List<Book> result = bookService.getBooksFromCountryNotOlderThan(country, from);
-		List<Book> result = bookService.getSpecificUKBooks();
+	@RequestMapping("/query/{country}")
+	ResponseEntity<List<Book>> getBooksFromCountry(@PathVariable String country,
+			@RequestParam(required = false) Integer from) {
+		List<Book> result = bookService.getSpecificBooks(country, from);
 		return new ResponseEntity<List<Book>>(result, HttpStatus.OK);
 	}
 }
